@@ -1,8 +1,8 @@
-Beyond {gtsummary}: How the {crane} Package Extends the Framework for Pharmaceutical Reporting
+Adopting gtsummary at Scale: How Roche Built a Companion to gtsummary to Standardise and Simplify ARD-Based Reporting
 
 ================
 
-### R in Pharma 2025
+### PHUSE US Connect 2026
 
 by Daniel D. Sjoberg 
 

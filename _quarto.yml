@@ -10,7 +10,7 @@ website:
   description: "Talk at R in Pharma 2025"
   favicon: "images/crane-hex.png"
 
-  repo-url: https://github.com/ddsjoberg/RinPharma-crane-2025
+  repo-url: https://github.com/ddsjoberg/phuse-crane-2026
   repo-actions: [edit, issue]
 
   page-footer:
@@ -24,7 +24,7 @@ website:
     align: center
     tools:
       - icon: github
-        href: https://github.com/ddsjoberg/RinPharma-crane-2025
+        href: https://github.com/ddsjoberg/phuse-crane-2026
         text: GitHub
     style: docked
     contents:
