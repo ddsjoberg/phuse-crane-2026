@@ -1,6 +1,6 @@
 ---
-title: "Beyond {gtsummary}: How the {crane} Package Extends the Framework for Pharmaceutical Reporting"
-subtitle: "Talk@[R in Pharma 2025](https://rinpharma.com/docs/RPH2025/)"
+title: "Adopting gtsummary at Scale: How Roche Built a Companion to gtsummary to Standardise and Simplify ARD-Based Reporting"
+subtitle: "Talk@[PHUSE US Connect 2026](https://www.phuse-events.org/attend/frontend/reg/thome.csp?pageID=56977&eventID=88)"
 engine: knitr
 editor: 
   markdown: 
@@ -9,18 +9,23 @@ editor:
 
 ------------------------------------------------------------------------
 
-🗓️ November 5, 2025 08:40AM - 09:00AM PST
+🗓️ March 25, 2026 04:30PM - 05:00PM
 
-📝 [Conference Registration](https://events.zoom.us/ev/Ai-geyS63AOzr-Tskeu2jwsPAZkX9yQixTAJuQzNT-h_rw24wX-p~AnyGxi92zGyWPS_7xPj-Oax9RjoaU3pZS0DjeX45ML084eyqq4qo6O7BMg)
+📝 [Conference Registration](https://www.phuse-events.org/attend/frontend/reg/tRegisterEmailNew.csp?pageID=56858&ef_sel_menu=5190&eventID=88&tempPersonID=174932)
 
 ------------------------------------------------------------------------
 
 ## Description
 
-{gtsummary} has become the most-used R package for clinical tables in the R ecosystem, winning awards from the American Statistical Association and Posit. Building on this foundation, we created {crane}, an open-source extension that facilitates reporting requirements in the pharmaceutical space. Because {crane} and {gtsummary} are built upon Analysis Results Datasets (ARDs), study teams can take advantage of this foundation that streamlines the QC process and allows for simple re-use of calculated results in subsequent reporting.
+{gtsummary} is a widely used R package for creating publication-ready summary tables across diverse fields.
+While its flexibility supports broad adoption, organizations often require consistent formatting and domain-specific functionality to meet internal and field standards.
 
-In this session we show how: (1) a vanilla {gtsummary} script instantly upgrades when {crane} is loaded; (2) ARD-based outputs make QC a straightforward operation; (3) LLMs can summarise the language-agnostic ARD results for medical writers in seconds. You’ll leave with a blueprint of how to adapt {crane} for your reporting needs or (or roll your own) and shorten table turnaround on day one.
+At Roche, we developed crane, a companion R package to gtsummary, to streamline adoption and ensure compliance with company reporting requirements.
+{crane} provides a Roche-specific gtsummary theme that applies standardized defaults for table appearance, as well as custom functions for creating tables too specialized to reside in the general gtsummary package.
+Importantly, this framework supports the production of Analysis Results Data (ARD)–based outputs
 
+This approach lowers barriers to adoption within an organization and ensures high-quality, standardized outputs across teams.
+We will present the design of crane, share lessons learned from its implementation, and highlight how organizations can extend open-source tools with institution-specific functionality to balance flexibility with standardization.
 
 ## Slides
 
@@ -35,8 +40,7 @@ In this session we show how: (1) a vanilla {gtsummary} script instantly upgrades
 
 ![](images/dan-circle.png){style="float:left;padding: 0 10px 0 0;" fig-alt="Headshot of Daniel Sjoberg" width="150"}
 
-[**Daniel D. Sjoberg**](https://www.danieldsjoberg.com/) (he/him) is a
-Senior Principal Data Scientist at Genentech. Previously, he was a Lead
+[**Daniel D. Sjoberg**](https://www.danieldsjoberg.com/) (he/him) is the Visual Analytics Lead at Genentech. Previously, he was a Lead
 Data Science Manager at the Prostate Cancer Clinical Trials Consortium,
 and a Senior Biostatistician at Memorial Sloan Kettering Cancer Center
 in New York City. He enjoys R package development, creating many
