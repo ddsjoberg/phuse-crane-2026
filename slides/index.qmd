@@ -97,7 +97,7 @@ pkgs_all <-
 pkgs_pharmaverse <- c("gtsummary", "rtables", "tfrmt", "tidytlg", "Tplyr")
 
 df_30day <- 
-  cranlogs::cran_downloads(packages = pkgs_all, from = "2025-08-15", to = "2025-09-15") |> 
+  cranlogs::cran_downloads(packages = pkgs_all, from = "2026-01-20", to = "2026-02-20") |> 
   dplyr::summarise(.by = package, count = sum(count)) |> 
   dplyr::arrange(-count) |> 
   dplyr::mutate(
@@ -490,15 +490,15 @@ Two or more {gtsummary} tables can be combined by either [merging]{.emphasis} or
 
 ![](images/gtsummary_rmarkdown.png)
 
-## Finally, All About {crane}
+## Finally, Introducing {crane}
 
 ::::: columns
 ::: {.column width="50%"}
-![](images/crane-movie-poster2.png)
+![](images/crane-movie-poster-musical.png)
 :::
 
 ::: {.column width="50%"}
-![](images/crane-movie-poster2.png)
+![](images/crane-movie-poster-musical.png)
 :::
 :::::
 
