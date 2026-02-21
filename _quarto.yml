@@ -15,10 +15,10 @@ website:
 
   page-footer:
     left: "This page is built with ❤️ and [Quarto](https://quarto.org/). Inspired by [@minecr.bsky.social](https://bsky.app/profile/minecr.bsky.social)."
-    background: "#ffcee8"
+    background: "#FFF1E0"
 
   sidebar:
-    background: "#ffcee8"
+    background: "#FFF1E0"
     logo: "images/crane-hex.png"
     pinned: true
     align: center

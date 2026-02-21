@@ -17,6 +17,7 @@ format:
     transition: fade
     slide-number: true
     chalkboard: true
+    background-color: "#F3E8FF"
 execute:
   echo: true
   freeze: false
