@@ -2,247 +2,247 @@
   {
     "objectID": "slides/index.html#what-is-crane",
     "href": "slides/index.html#what-is-crane",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "What is {crane} ? ",
     "text": "What is {crane} ? \n\n{crane} is the Roche extension to {gtsummary} for Roche’s reporting requirements\n{crane} exports a {gtsummary} theme\n{crane} exports functions to bespoke summary tables"
   },
   {
     "objectID": "slides/index.html#but-first-what-is-gtsummary",
     "href": "slides/index.html#but-first-what-is-gtsummary",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "But First, What is {gtsummary} ?",
-    "text": "But First, What is {gtsummary} ?\n\n\nHow it started\n\n\nBegan to address reproducibility issues while working in academia\nGoal to build a package to summarize study results with code that was both simple and customizable\n\n\n\nHow it’s going\n\n\nThe stats\n\n1,700,000 installations from CRAN\n1,200 GitHub stars\n1,000 citations in peer-reviewed articles\n50 code contributors\n\nWon the 2021 American Statistical Association (ASA) Innovation in Programming Award\nWon the 2024 Posit Pharma Table Contest\nWon the 2025 Brian Bole Award of Excellence from R in Pharma"
+    "text": "But First, What is {gtsummary} ?\n\n\nHow it started\n\n\nBegan to address reproducibility issues while working in academia\nGoal to build a package to summarize study results with code that was both simple and customizable\n\n\n\nHow it’s going\n\n\nThe stats\n\n1,900,000 installations from CRAN\n1,200 GitHub stars\n1,200 citations in peer-reviewed articles\n50 code contributors\n\nWon the 2025 Brian Bole Award of Excellence from R in Pharma\nWon the 2021 American Statistical Association (ASA) Innovation in Programming Award\nWon the 2024 Posit Pharma Table Contest"
   },
   {
     "objectID": "slides/index.html#monthly-gtsummary-cran-downloads",
     "href": "slides/index.html#monthly-gtsummary-cran-downloads",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "Monthly {gtsummary} CRAN Downloads",
     "text": "Monthly {gtsummary} CRAN Downloads\n\n\n\n\n\n\n\n\n\n\n\nFigure contains 30-day downloads for all summary table packages on CRAN."
   },
   {
     "objectID": "slides/index.html#gtsummary-llms",
     "href": "slides/index.html#gtsummary-llms",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "{gtsummary} + LLMs ",
     "text": "{gtsummary} + LLMs \n\nSince {gtsummary} is widely adopted, our LLMs besties work wonderfully out of the box. No additional training needed!\nThe {gtsummary} site has recently added an AI assistant and it’s AMAZING! Powered by kapa.ai (thank you!)"
   },
   {
     "objectID": "slides/index.html#this-talk-is-not-about-gtsummary",
     "href": "slides/index.html#this-talk-is-not-about-gtsummary",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "This Talk is Not about {gtsummary} ",
     "text": "This Talk is Not about {gtsummary} \n\nBut, I want to touch on two items\n\n{gtsummary} creates beautiful tables that are easy to customize\n{gtsummary} supports themes that allow users to change defaults and other details of summary tables"
   },
   {
     "objectID": "slides/index.html#a-little-data-preparation",
     "href": "slides/index.html#a-little-data-preparation",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "A Little Data Preparation",
     "text": "A Little Data Preparation\n\nlibrary(gtsummary)\nlibrary(tidyverse)\n\nadsl &lt;- pharmaverseadam::adsl |&gt; \n  filter(SAFFL == \"Y\") |&gt; \n  mutate(ARM2 = word(ARM), FEMALE = SEX == \"F\") |&gt; \n  labelled::set_variable_labels(FEMALE = \"Female\")\n\nadae &lt;- pharmaverseadam::adae |&gt; \n  filter(\n    USUBJID %in% adsl$USUBJID,\n    AESOC %in% c(\"CARDIAC DISORDERS\", \"EYE DISORDERS\"),\n    AEDECOD %in% c(\"ATRIAL FLUTTER\", \"MYOCARDIAL INFARCTION\", \"EYE ALLERGY\", \"EYE SWELLING\")\n  ) |&gt; \n  mutate(ARM2 = word(ARM))\n\nadtte &lt;- pharmaverseadam::adtte_onco |&gt; \n  dplyr::filter(PARAM == \"Progression Free Survival\") |&gt; \n  mutate(ARM2 = word(ARM))"
   },
   {
     "objectID": "slides/index.html#gtsummary-tables",
     "href": "slides/index.html#gtsummary-tables",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "{gtsummary} Tables ",
     "text": "{gtsummary} Tables \nWe will review briefly just one summary table function.\n\ntbl_summary()\n\n\nOther functions helpful functions we’re not covering:\n\n\ntbl_hierarchical(): Summarize AE, Con Meds, and other similar rates\ntbl_hierarchical_count(): similar to tbl_hierarchical() for counts instead of rates\ntbl_cross(): cross tabulations\ntbl_continuous(): summarizing continuous variables by 2 categorical variables\ntbl_wide_summary(): similar to tbl_summary() but statistics are presented in separate columns\nmany more!"
   },
   {
     "objectID": "slides/index.html#basic-tbl_summary",
     "href": "slides/index.html#basic-tbl_summary",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "Basic tbl_summary()",
     "text": "Basic tbl_summary()\n\n\n\nlibrary(gtsummary)\n\nadsl |&gt; \n  tbl_summary(\n    include = c(AGE, ETHNIC, FEMALE)\n  )\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nN = 2541\n\n\n\n\nAge\n77 (70, 81)\n\n\nEthnicity\n\n\n\n\n    HISPANIC OR LATINO\n12 (4.7%)\n\n\n    NOT HISPANIC OR LATINO\n242 (95%)\n\n\nFemale\n143 (56%)\n\n\n\n1 Median (Q1, Q3); n (%)\n\n\n\n\n\n\n\n\n\n\nFour types of summaries: continuous, continuous2, categorical, and dichotomous\nStatistics are median (IQR) for continuous, n (%) for categorical/dichotomous\nVariables coded 0/1, TRUE/FALSE, Yes/No treated as dichotomous by default\nLabel attributes are printed automatically"
   },
   {
     "objectID": "slides/index.html#customize-tbl_summary-output",
     "href": "slides/index.html#customize-tbl_summary-output",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "Customize tbl_summary() output",
     "text": "Customize tbl_summary() output\n\n\nadsl |&gt; \n  tbl_summary(\n    include = c(AGE, ETHNIC, FEMALE),\n    by = ARM2,\n  )\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nPlacebo\nN = 861\nXanomeline\nN = 1681\n\n\n\n\nAge\n76 (69, 82)\n77 (71, 81)\n\n\nEthnicity\n\n\n\n\n\n\n    HISPANIC OR LATINO\n3 (3.5%)\n9 (5.4%)\n\n\n    NOT HISPANIC OR LATINO\n83 (97%)\n159 (95%)\n\n\nFemale\n53 (62%)\n90 (54%)\n\n\n\n1 Median (Q1, Q3); n (%)\n\n\n\n\n\n\n\n\n\n\n\n\nby: specify a column variable for cross-tabulation"
   },
   {
     "objectID": "slides/index.html#customize-tbl_summary-output-1",
     "href": "slides/index.html#customize-tbl_summary-output-1",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "Customize tbl_summary() output",
     "text": "Customize tbl_summary() output\n\n\nadsl |&gt; \n  tbl_summary(\n    include = c(AGE, ETHNIC, FEMALE),\n    by = ARM2,\n    type = AGE ~ \"continuous2\",\n  )\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nPlacebo\nN = 861\nXanomeline\nN = 1681\n\n\n\n\nAge\n\n\n\n\n\n\n    Median (Q1, Q3)\n76 (69, 82)\n77 (71, 81)\n\n\nEthnicity\n\n\n\n\n\n\n    HISPANIC OR LATINO\n3 (3.5%)\n9 (5.4%)\n\n\n    NOT HISPANIC OR LATINO\n83 (97%)\n159 (95%)\n\n\nFemale\n53 (62%)\n90 (54%)\n\n\n\n1 n (%)\n\n\n\n\n\n\n\n\n\n\n\n\nby: specify a column variable for cross-tabulation\ntype: specify the summary type"
   },
   {
     "objectID": "slides/index.html#customize-tbl_summary-output-2",
     "href": "slides/index.html#customize-tbl_summary-output-2",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "Customize tbl_summary() output",
     "text": "Customize tbl_summary() output\n\n\nadsl |&gt; \n  tbl_summary(\n    include = c(AGE, ETHNIC, FEMALE),\n    by = ARM2,\n    type = AGE ~ \"continuous2\",\n    statistic = \n      list(\n        AGE ~ c(\"{mean} ({sd})\", \n                \"{min}, {max}\"), \n        FEMALE ~ \"{n} / {N} ({p}%)\"\n      ),\n  )\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nPlacebo\nN = 861\nXanomeline\nN = 1681\n\n\n\n\nAge\n\n\n\n\n\n\n    Mean (SD)\n75 (9)\n75 (8)\n\n\n    Min, Max\n52, 89\n51, 88\n\n\nEthnicity\n\n\n\n\n\n\n    HISPANIC OR LATINO\n3 (3.5%)\n9 (5.4%)\n\n\n    NOT HISPANIC OR LATINO\n83 (97%)\n159 (95%)\n\n\nFemale\n53 / 86 (62%)\n90 / 168 (54%)\n\n\n\n1 n (%); n / N (%)\n\n\n\n\n\n\n\n\n\n\n\n\nby: specify a column variable for cross-tabulation\ntype: specify the summary type\nstatistic: customize the reported statistics"
   },
   {
     "objectID": "slides/index.html#customize-tbl_summary-output-3",
     "href": "slides/index.html#customize-tbl_summary-output-3",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "Customize tbl_summary() output",
     "text": "Customize tbl_summary() output\n\n\nadsl |&gt; \n  tbl_summary(\n    include = c(AGE, ETHNIC, FEMALE),\n    by = ARM2,\n    type = AGE ~ \"continuous2\",\n    statistic = \n      list(\n        AGE ~ c(\"{mean} ({sd})\", \n                \"{min}, {max}\"), \n        FEMALE ~ \"{n} / {N} ({p}%)\"\n      ),\n    label = \n      AGE ~ \"Age, years\",\n  )\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nPlacebo\nN = 861\nXanomeline\nN = 1681\n\n\n\n\nAge, years\n\n\n\n\n\n\n    Mean (SD)\n75 (9)\n75 (8)\n\n\n    Min, Max\n52, 89\n51, 88\n\n\nEthnicity\n\n\n\n\n\n\n    HISPANIC OR LATINO\n3 (3.5%)\n9 (5.4%)\n\n\n    NOT HISPANIC OR LATINO\n83 (97%)\n159 (95%)\n\n\nFemale\n53 / 86 (62%)\n90 / 168 (54%)\n\n\n\n1 n (%); n / N (%)\n\n\n\n\n\n\n\n\n\n\n\n\nby: specify a column variable for cross-tabulation\ntype: specify the summary type\nstatistic: customize the reported statistics\n\n\n\nlabel: change or customize variable labels"
   },
   {
     "objectID": "slides/index.html#customize-tbl_summary-output-4",
     "href": "slides/index.html#customize-tbl_summary-output-4",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "Customize tbl_summary() output",
     "text": "Customize tbl_summary() output\n\n\nadsl |&gt; \n  tbl_summary(\n    include = c(AGE, ETHNIC, FEMALE),\n    by = ARM2,\n    type = AGE ~ \"continuous2\",\n    statistic = \n      list(\n        AGE ~ c(\"{mean} ({sd})\", \n                \"{min}, {max}\"), \n        FEMALE ~ \"{n} / {N} ({p}%)\"\n      ),\n    label = \n      AGE ~ \"Age, years\",\n    digits = AGE ~ list(sd = 1) # report SD(age) to one decimal place\n  )\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nPlacebo\nN = 861\nXanomeline\nN = 1681\n\n\n\n\nAge, years\n\n\n\n\n\n\n    Mean (SD)\n75 (8.6)\n75 (8.1)\n\n\n    Min, Max\n52, 89\n51, 88\n\n\nEthnicity\n\n\n\n\n\n\n    HISPANIC OR LATINO\n3 (3.5%)\n9 (5.4%)\n\n\n    NOT HISPANIC OR LATINO\n83 (97%)\n159 (95%)\n\n\nFemale\n53 / 86 (62%)\n90 / 168 (54%)\n\n\n\n1 n (%); n / N (%)\n\n\n\n\n\n\n\n\n\n\n\n\nby: specify a column variable for cross-tabulation\ntype: specify the summary type\nstatistic: customize the reported statistics\n\n\n\nlabel: change or customize variable labels\ndigits: specify the number of decimal places for rounding"
   },
   {
     "objectID": "slides/index.html#gtsummary-formulas",
     "href": "slides/index.html#gtsummary-formulas",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "{gtsummary} + formulas",
     "text": "{gtsummary} + formulas\nThis syntax is also used in {cards}, {cardx}, {crane}, and {gt}.\n\n\n\nNamed list are OK too! label = list(age = \"Patient Age\")"
   },
   {
     "objectID": "slides/index.html#section",
     "href": "slides/index.html#section",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "",
     "text": "{gtsummary} selectors\n\nUse the following helpers to select groups of variables: all_continuous(), all_categorical()\nUse all_stat_cols() to select the summary statistic columns\n\nAdd-on functions in {gtsummary}\ntbl_summary() objects can also be updated using related functions.\n\nadd_*() add additional column of statistics or information, e.g. p-values, q-values, overall statistics, treatment differences, N obs., and more\nmodify_*() modify table headers, spanning headers, footnotes, and more"
   },
   {
     "objectID": "slides/index.html#update-tbl_summary-with-add_",
     "href": "slides/index.html#update-tbl_summary-with-add_",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "Update tbl_summary() with add_*()",
     "text": "Update tbl_summary() with add_*()\n\n\nadsl |&gt;\n  tbl_summary(\n    by = ARM2,\n    include = c(AGE, ETHNIC, FEMALE)\n  ) |&gt; \n  add_overall(last = TRUE)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nPlacebo\nN = 861\nXanomeline\nN = 1681\nOverall\nN = 2541\n\n\n\n\nAge\n76 (69, 82)\n77 (71, 81)\n77 (70, 81)\n\n\nEthnicity\n\n\n\n\n\n\n\n\n    HISPANIC OR LATINO\n3 (3.5%)\n9 (5.4%)\n12 (4.7%)\n\n\n    NOT HISPANIC OR LATINO\n83 (97%)\n159 (95%)\n242 (95%)\n\n\nFemale\n53 (62%)\n90 (54%)\n143 (56%)\n\n\n\n1 Median (Q1, Q3); n (%)\n\n\n\n\n\n\n\n\n\nadd_overall(): adds a column of overall statistics"
   },
   {
     "objectID": "slides/index.html#update-tbl_summary-with-modify_",
     "href": "slides/index.html#update-tbl_summary-with-modify_",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "Update tbl_summary() with modify_*()",
     "text": "Update tbl_summary() with modify_*()\n\n\ntbl &lt;-\n  adsl |&gt; \n  tbl_summary(by = ARM2, include = c(\"AGE\", \"ETHNIC\", \"FEMALE\")) |&gt;\n  modify_header(\n    stat_1 ~ \"**Group A**\",\n    stat_2 ~ \"**Group B**\"\n  ) |&gt; \n  modify_spanning_header(\n    all_stat_cols() ~ \"**Drug**\") |&gt; \n  modify_footnote(\n    all_stat_cols() ~ \n      paste(\"median (IQR) for continuous;\",\n            \"n (%) for categorical\")\n  )\ntbl\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\n\nDrug\n\n\n\nGroup A1\nGroup B1\n\n\n\n\nAge\n76 (69, 82)\n77 (71, 81)\n\n\nEthnicity\n\n\n\n\n\n\n    HISPANIC OR LATINO\n3 (3.5%)\n9 (5.4%)\n\n\n    NOT HISPANIC OR LATINO\n83 (97%)\n159 (95%)\n\n\nFemale\n53 (62%)\n90 (54%)\n\n\n\n1 median (IQR) for continuous; n (%) for categorical\n\n\n\n\n\n\n\n\n\nUse show_header_names() to see the internal header names available for use in modify_header()"
   },
   {
     "objectID": "slides/index.html#column-names",
     "href": "slides/index.html#column-names",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "Column names",
     "text": "Column names\n\nshow_header_names(tbl)\n\nColumn Name   Header                 level*             N*          n*          p*             \nlabel         \"**Characteristic**\"                      254 &lt;int&gt;                              \nstat_1        \"**Group A**\"             Placebo &lt;chr&gt;   254 &lt;int&gt;    86 &lt;int&gt;   0.339 &lt;dbl&gt;    \nstat_2        \"**Group B**\"          Xanomeline &lt;chr&gt;   254 &lt;int&gt;   168 &lt;int&gt;   0.661 &lt;dbl&gt;    \n\n\n* These values may be dynamically placed into headers (and other locations).\nℹ Review the `modify_header()` (`?gtsummary::modify_header()`) help for examples.\n\n\n\n\nall_stat_cols() selects columns \"stat_1\" and \"stat_2\""
   },
   {
     "objectID": "slides/index.html#add-on-functions-in-gtsummary-1",
     "href": "slides/index.html#add-on-functions-in-gtsummary-1",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "Add-on functions in {gtsummary}",
     "text": "Add-on functions in {gtsummary}\nAnd many more!\nSee the documentation at http://www.danieldsjoberg.com/gtsummary/reference/index.html\nAnd a detailed tbl_summary() vignette at http://www.danieldsjoberg.com/gtsummary/articles/tbl_summary.html"
   },
   {
     "objectID": "slides/index.html#cobbling-table-with-gtsummary",
     "href": "slides/index.html#cobbling-table-with-gtsummary",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "Cobbling Table with {gtsummary}",
     "text": "Cobbling Table with {gtsummary}\n\nTwo or more {gtsummary} tables can be combined by either merging or stacking.\n\ntbl_merge() for horizontal combining\ntbl_stack() for vertical combining\n\n\n But more on this later in the {crane} section"
   },
   {
     "objectID": "slides/index.html#gtsummary-print-engines",
     "href": "slides/index.html#gtsummary-print-engines",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "{gtsummary} print engines",
     "text": "{gtsummary} print engines"
   },
   {
-    "objectID": "slides/index.html#finally-all-about-crane",
-    "href": "slides/index.html#finally-all-about-crane",
-    "title": "Beyond {gtsummary}",
-    "section": "Finally, All About {crane}",
-    "text": "Finally, All About {crane}"
+    "objectID": "slides/index.html#finally-introducing-crane",
+    "href": "slides/index.html#finally-introducing-crane",
+    "title": "Adopting gtsummary at Scale",
+    "section": "Finally, Introducing {crane}",
+    "text": "Finally, Introducing {crane}"
   },
   {
     "objectID": "slides/index.html#wrapping-functions",
     "href": "slides/index.html#wrapping-functions",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "Wrapping Functions ",
     "text": "Wrapping Functions \nThe first function we added to {crane} was tbl_roche_summary(): a very thin wrapper for gtsummary::tbl_summary().\n\n\nContinuous variables default to continuous2.\ntbl_summary(missing*) arguments have been changed to tbl_roche_summary(nonmissing*).\n\nWe highlight non-missing counts over missing counts, which are the default in {gtsummary}\n\nCounts represented by 0 (0%) print as 0.\n\n\n\nlibrary(crane)\n\nadsl |&gt; \n  dplyr::mutate(ETHNIC = forcats::fct_expand(ETHNIC, \"REFUSED\")) |&gt; \n  tbl_roche_summary(\n    by = ARM2, \n    include = c(AGE, ETHNIC),\n    nonmissing = \"always\"\n  )"
   },
   {
     "objectID": "slides/index.html#wrapping-functions-output",
     "href": "slides/index.html#wrapping-functions-output",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "Wrapping Functions ",
-    "text": "Wrapping Functions \n\n\n\nTable 1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPlacebo\n(N = 86)\nXanomeline\n(N = 168)\n\n\n\n\nAge\n\n\n\n\n\n\n    n\n86\n168\n\n\n    Mean (SD)\n75 (9)\n75 (8)\n\n\n    Median\n76\n77\n\n\n    Min - Max\n52 - 89\n51 - 88\n\n\nETHNIC\n\n\n\n\n\n\n    n\n86\n168\n\n\n    HISPANIC OR LATINO\n3 (3.5%)\n9 (5.4%)\n\n\n    NOT HISPANIC OR LATINO\n83 (97%)\n159 (95%)\n\n\n    REFUSED\n0\n0"
+    "text": "Wrapping Functions \n\n\n\nTable 1\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPlacebo\n(N = 86)\nXanomeline\n(N = 168)\n\n\n\n\nAge\n\n\n\n\n\n\n    n\n86\n168\n\n\n    Mean (SD)\n75.2 (8.6)\n75.0 (8.1)\n\n\n    Median\n76.0\n77.0\n\n\n    Min - Max\n52 - 89\n51 - 88\n\n\nETHNIC\n\n\n\n\n\n\n    n\n86\n168\n\n\n    HISPANIC OR LATINO\n3 (3.5%)\n9 (5.4%)\n\n\n    NOT HISPANIC OR LATINO\n83 (96.5%)\n159 (94.6%)\n\n\n    REFUSED\n0\n0"
   },
   {
     "objectID": "slides/index.html#extending-with-new-functions",
     "href": "slides/index.html#extending-with-new-functions",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "Extending with New Functions ",
     "text": "Extending with New Functions \n\nLab values are summarized by visit and include the change from baseline.\nThis is a simple table that is just a tbl_merge() of the AVAL summary and the CHG summary.\nBut the general structure appears enough times in our catalog, we make it simple for our programmers to create.\n\n\nlibrary(crane)\n\nadlb |&gt; \n  dplyr::filter(PARAM == \"Albumin (g/L)\") |&gt; \n  tbl_baseline_chg(\n    by = \"ARM\",\n    baseline_level = \"Baseline\",\n    denominator = adsl\n  )"
   },
   {
     "objectID": "slides/index.html#extending-with-new-functions-1",
     "href": "slides/index.html#extending-with-new-functions-1",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "Extending with New Functions ",
     "text": "Extending with New Functions"
   },
   {
     "objectID": "slides/index.html#extending-with-new-functions-2",
     "href": "slides/index.html#extending-with-new-functions-2",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "Extending with New Functions ",
     "text": "Extending with New Functions"
   },
   {
     "objectID": "slides/index.html#extending-with-new-functions-3",
     "href": "slides/index.html#extending-with-new-functions-3",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "Extending with New Functions ",
     "text": "Extending with New Functions"
   },
   {
     "objectID": "slides/index.html#extending-with-new-functions-4",
     "href": "slides/index.html#extending-with-new-functions-4",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "Extending with New Functions ",
     "text": "Extending with New Functions"
   },
   {
     "objectID": "slides/index.html#create-a-company-theme",
     "href": "slides/index.html#create-a-company-theme",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "Create a Company Theme ",
     "text": "Create a Company Theme \nOur theme is implemented in crane::theme_gtsummary_roche()\nPrimary changes include:\n\nSets a custom function for rounding percentages.\nRound all p-values to four decimal places.\nHeaders default to include the N in parenthesis without bold, e.g. 'Placebo  \\n (N = 184)'.\nAll tables are printed with {flextable} and we add Roche-specific styling to the table.\n\nUpdate the default font, font size, table borders, cell padding, etc. to meet our guidelines."
   },
   {
     "objectID": "slides/index.html#create-a-company-theme-1",
     "href": "slides/index.html#create-a-company-theme-1",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "Create a Company Theme ",
-    "text": "Create a Company Theme \n\n\ntheme_gtsummary_roche()\n\nadsl |&gt; \n  dplyr::mutate(ETHNIC = forcats::fct_expand(ETHNIC, \"REFUSED\")) |&gt; \n  tbl_roche_summary(\n    by = ARM2, \n    include = c(AGE, ETHNIC),\n    nonmissing = \"always\"\n  )\n\n\nPlacebo  (N = 86)Xanomeline  (N = 168)Agen86168Mean (SD)75 (9)75 (8)Median7677Min - Max52 - 8951 - 88ETHNICn86168HISPANIC OR LATINO3 (3.5%)9 (5.4%)NOT HISPANIC OR LATINO83 (96.5%)159 (94.6%)REFUSED00"
+    "text": "Create a Company Theme \n\n\ntheme_gtsummary_roche()\n\nadsl |&gt; \n  dplyr::mutate(ETHNIC = forcats::fct_expand(ETHNIC, \"REFUSED\")) |&gt; \n  tbl_roche_summary(\n    by = ARM2, \n    include = c(AGE, ETHNIC),\n    nonmissing = \"always\"\n  )\n\n\nPlacebo  (N = 86)Xanomeline  (N = 168)Agen86168Mean (SD)75.2 (8.6)75.0 (8.1)Median76.077.0Min - Max52 - 8951 - 88ETHNICn86168HISPANIC OR LATINO3 (3.5%)9 (5.4%)NOT HISPANIC OR LATINO83 (96.5%)159 (94.6%)REFUSED00"
   },
   {
     "objectID": "slides/index.html#extend-with-ard-first-functionality",
     "href": "slides/index.html#extend-with-ard-first-functionality",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "Extend with ARD-first Functionality ",
     "text": "Extend with ARD-first Functionality \n\nWe don’t have time to cover in detail, but there is another wonderful way to create bespoke tables and functions.\nThe {gtsummary} package supports creating tables using ARDs (Analysis Results Datasets).\n\nData ➡️ ARD ➡️ Table\n\nThis method is particularly useful for efficacy tables, as they contain statistics that are not our standard rates, counts, and univariate descriptor statistics.\nReview the ARD-first Vignette for a detailed walk through."
   },
   {
     "objectID": "slides/index.html#extend-with-ard-first-functionality-1",
     "href": "slides/index.html#extend-with-ard-first-functionality-1",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "Extend with ARD-first Functionality ",
-    "text": "Extend with ARD-first Functionality \n\ntbl_survfit_times(\n  data = adtte, \n  times = 12, \n  by = \"ARM2\", \n  label = \"Month {time}\"\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\nPlacebo\n(N = 86)\nXanomeline\n(N = 168)\n\n\n\n\nMonth 12\n\n\n\n\n\n\n    Patients remaining at risk\n5\n6\n\n\n    Event Free Rate (%)\n80.0%\n100.0%\n\n\n    95% CI\n51.6%, 100.0%\n100.0%, 100.0%\n\n\n\n\n\n\n\n\n\nIf you prefer not to make an ARD first, you can also just create a data frame of a table and convert it to {gtsummary} and style it from there."
+    "text": "Extend with ARD-first Functionality \n\ntbl_survfit_times(\n  data = adtte, \n  times = 12, \n  by = \"ARM2\", \n  label = \"Month {time}\"\n)\n\n\n\n\n\n\n\n\n\n\n\n\n\nPlacebo\n(N = 86)\nXanomeline\n(N = 168)\n\n\n\n\nMonth 12\n\n\n\n\n\n\n    Patients remaining at risk\n5\n6\n\n\n    Event Free Rate (%)\n80.0\n100.0\n\n\n    95% CI\n(51.6, 100.0)\n(100.0, 100.0)\n\n\n\n\n\n\n\n\n\nIf you prefer not to make an ARD first, you can also just create a data frame of a table and convert it to {gtsummary} and style it from there."
   },
   {
     "objectID": "slides/index.html#section-1",
     "href": "slides/index.html#section-1",
-    "title": "Beyond {gtsummary}",
+    "title": "Adopting gtsummary at Scale",
     "section": "",
     "text": "When it comes time to build your custom tables, use the {crane} package as a blueprint."
   },
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Beyond {gtsummary}: How the {crane} Package Extends the Framework for Pharmaceutical Reporting",
+    "title": "Adopting gtsummary at Scale: How Roche Built a Companion to gtsummary to Standardise and Simplify ARD-Based Reporting",
     "section": "",
-    "text": "🗓️ November 5, 2025 08:40AM - 09:00AM PST\n📝 Conference Registration",
+    "text": "🗓️ March 25, 2026 04:30PM - 05:00PM\n📝 Conference Registration",
     "crumbs": [
       "Home"
     ]
@@ -250,9 +250,9 @@
   {
     "objectID": "index.html#description",
     "href": "index.html#description",
-    "title": "Beyond {gtsummary}: How the {crane} Package Extends the Framework for Pharmaceutical Reporting",
+    "title": "Adopting gtsummary at Scale: How Roche Built a Companion to gtsummary to Standardise and Simplify ARD-Based Reporting",
     "section": "Description",
-    "text": "Description\n{gtsummary} has become the most-used R package for clinical tables in the R ecosystem, winning awards from the American Statistical Association and Posit. Building on this foundation, we created {crane}, an open-source extension that facilitates reporting requirements in the pharmaceutical space. Because {crane} and {gtsummary} are built upon Analysis Results Datasets (ARDs), study teams can take advantage of this foundation that streamlines the QC process and allows for simple re-use of calculated results in subsequent reporting.\nIn this session we show how: (1) a vanilla {gtsummary} script instantly upgrades when {crane} is loaded; (2) ARD-based outputs make QC a straightforward operation; (3) LLMs can summarise the language-agnostic ARD results for medical writers in seconds. You’ll leave with a blueprint of how to adapt {crane} for your reporting needs or (or roll your own) and shorten table turnaround on day one.",
+    "text": "Description\n{gtsummary} is a widely used R package for creating publication-ready summary tables across diverse fields. While its flexibility supports broad adoption, organizations often require consistent formatting and domain-specific functionality to meet internal and field standards.\nAt Roche, we developed crane, a companion R package to gtsummary, to streamline adoption and ensure compliance with company reporting requirements. {crane} provides a Roche-specific gtsummary theme that applies standardized defaults for table appearance, as well as custom functions for creating tables too specialized to reside in the general gtsummary package. Importantly, this framework supports the production of Analysis Results Data (ARD)–based outputs\nThis approach lowers barriers to adoption within an organization and ensures high-quality, standardized outputs across teams. We will present the design of crane, share lessons learned from its implementation, and highlight how organizations can extend open-source tools with institution-specific functionality to balance flexibility with standardization.",
     "crumbs": [
       "Home"
     ]
@@ -260,7 +260,7 @@
   {
     "objectID": "index.html#slides",
     "href": "index.html#slides",
-    "title": "Beyond {gtsummary}: How the {crane} Package Extends the Framework for Pharmaceutical Reporting",
+    "title": "Adopting gtsummary at Scale: How Roche Built a Companion to gtsummary to Standardise and Simplify ARD-Based Reporting",
     "section": "Slides",
     "text": "Slides\nView slides in full screen",
     "crumbs": [
@@ -268,11 +268,11 @@
     ]
   },
   {
-    "objectID": "index.html#instructor",
-    "href": "index.html#instructor",
-    "title": "Beyond {gtsummary}: How the {crane} Package Extends the Framework for Pharmaceutical Reporting",
-    "section": "Instructor",
-    "text": "Instructor\n\nDaniel D. Sjoberg (he/him) is a Senior Principal Data Scientist at Genentech. Previously, he was a Lead Data Science Manager at the Prostate Cancer Clinical Trials Consortium, and a Senior Biostatistician at Memorial Sloan Kettering Cancer Center in New York City. He enjoys R package development, creating many packages available on CRAN, R-Universe, and GitHub. He’s a co-organizer of rainbowR (a community that supports, promotes and connects LGBTQ+ people who code in the R language) and of the R Medicine Conference. His research interests include adaptive methods in clinical trials, precision medicine, and predictive modeling. Daniel is the winner of the 2021 American Statistical Association (ASA) Innovation in Statistical Programming and Analytics award.",
+    "objectID": "index.html#presenter",
+    "href": "index.html#presenter",
+    "title": "Adopting gtsummary at Scale: How Roche Built a Companion to gtsummary to Standardise and Simplify ARD-Based Reporting",
+    "section": "Presenter",
+    "text": "Presenter\n\nDaniel D. Sjoberg (he/him) is the Visual Analytics Lead at Genentech. Previously, he was a Lead Data Science Manager at the Prostate Cancer Clinical Trials Consortium, and a Senior Biostatistician at Memorial Sloan Kettering Cancer Center in New York City. He enjoys R package development, creating many packages available on CRAN, R-Universe, and GitHub. He’s a co-organizer of rainbowR (a community that supports, promotes and connects LGBTQ+ people who code in the R language) and of the R Medicine Conference. His research interests include adaptive methods in clinical trials, precision medicine, and predictive modeling. Daniel is the winner of the 2021 American Statistical Association (ASA) Innovation in Statistical Programming and Analytics award.",
     "crumbs": [
       "Home"
     ]
