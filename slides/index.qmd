@@ -4,11 +4,6 @@ subtitle: "How Roche Built a Companion to gtsummary to Standardise and Simplify 
 author: "Daniel D. Sjoberg <br><br> PHUSE US Connect 2026"
 logo: "../images/crane-hex.png"
 footer: "[www.danieldsjoberg.com/phuse-crane-2026/](https://www.danieldsjoberg.com/phuse-crane-2026/)"
-title-slide-attributes:
-  data-background-image: "../images/crane-hex.png"
-  data-background-size: contain # or 'contain', 'auto', '100% 100%', etc.
-  data-background-position: center # or 'top', 'bottom', 'left', 'right', 'top left', etc.
-  data-background-opacity: "0.4" # Adjust transparency (0 to 1)
 editor: source
 engine: knitr
 format: 
@@ -17,7 +12,6 @@ format:
     transition: fade
     slide-number: true
     chalkboard: true
-    background-color: "#F3E8FF"
 execute:
   echo: true
   freeze: false
@@ -63,16 +57,17 @@ options(width = 200)
 ::: small
 -   The stats
 
-    -   [1,700,000 installations]{.emphasis} from CRAN
+    -   [1,900,000 installations]{.emphasis} from CRAN
     -   1,200 GitHub stars
-    -   1,000 citations in peer-reviewed articles
+    -   1,200 citations in peer-reviewed articles
     -   50 code contributors
+
+-   Won the 2025 Brian Bole Award of Excellence from R in Pharma
 
 -   Won the 2021 American Statistical Association (ASA) Innovation in Programming Award
 
 -   Won the 2024 Posit Pharma Table Contest
 
--   Won the 2025 Brian Bole Award of Excellence from R in Pharma
 :::
 ::::
 ::::::
