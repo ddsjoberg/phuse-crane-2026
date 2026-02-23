@@ -1,0 +1,99 @@
+---
+title: "Adopting gtsummary at Scale"
+subtitle: "How Roche Built a Companion to gtsummary to Standardise and Simplify ARD-Based Reporting"
+author: "Daniel D. Sjoberg, Genentech, South San Francisco, California, USA"
+format:
+  html:
+    toc: false
+  docx:
+    toc: false
+---
+
+## ABSTRACT
+
+{gtsummary} is a widely used R package for creating publication-ready summary tables across diverse fields.
+While its flexibility supports broad adoption, organizations often require consistent formatting and domain-specific functionality to meet internal and field standards.
+
+At Roche, we developed crane, a companion R package to gtsummary, to streamline adoption and ensure compliance with company reporting requirements.
+{crane} provides a Roche-specific gtsummary theme that applies standardized defaults for table appearance, as well as custom functions for creating tables too specialized to reside in the general gtsummary package.
+Importantly, this framework supports the production of Analysis Results Data (ARD)–based outputs
+
+This approach lowers barriers to adoption within an organization and ensures high-quality, standardized outputs across teams.
+We will present the design of crane, share lessons learned from its implementation, and highlight how organizations can extend open-source tools with institution-specific functionality to balance flexibility with standardization.
+
+## INTRODUCTION
+
+In the modern landscape of clinical reporting, the ability to generate reproducible, publication-quality tables is essential for effective communication and regulatory success.
+Within the R ecosystem, the {gtsummary} package has become a gold standard for summarizing data and models due to its intuitive interface and broad flexibility.
+However, for large-scale organizations like Roche, this flexibility presents a challenge: ensuring that decentralized teams produce outputs that remain consistent with internal reporting standards and health authority requirements.
+
+To bridge the gap between general-purpose open-source tools and institutional compliance, we developed {crane}, a companion R package designed to streamline the adoption of {gtsummary} across the enterprise.
+By layering a Roche-specific theme engine over the existing framework, {crane} enforces standardized defaults for table appearance, effectively eliminating the manual overhead and risk of error associated with study-specific formatting.
+Furthermore, {crane} introduces specialized functions for complex clinical summaries that are too domain-specific for a general-purpose package, while simultaneously supporting the production of Analysis Results Data (ARD)–based outputs to ensure metadata traceability.
+
+This paper details the design of {crane} and explores how a "wrapper" strategy allows organizations to harness the innovation of the open-source community without sacrificing the uniformity required in a highly regulated industry.
+We will share lessons learned from its implementation and demonstrate how extending existing tools with institution-specific functionality can lower barriers to adoption, ultimately ensuring high-quality, standardized outputs across diverse global teams.
+
+## GTSUMMARY
+
+The {gtsummary} package has established itself as a cornerstone of the R ecosystem for generating reproducible, publication-quality summary tables.
+Its primary strength lies in its ability to bridge the gap between raw data analysis and the final reporting stage, offering an intuitive, "tidy" interface that integrates seamlessly with existing workflows.
+The package’s core functions, such as `tbl_summary()` for descriptive statistics and `tbl_regression()` for model summaries, employ sensible defaults that automatically identify variable types and apply appropriate statistical methods. This "one-stop-shop" approach significantly reduces the manual overhead typically associated with table construction.
+
+Beyond simple summaries, {gtsummary} provides a modular framework for customization and extension.
+Users can easily append p-values, overall statistics, and source notes using a suite of `add_*()` functions, or refine table aesthetics via `modify_*()` functions.
+A critical advancement in the package's evolution is its integration with the Analysis Results Data (ARD) framework.
+By leveraging the {cards} and {cardx} packages, {gtsummary} supports an "ARD-first" workflow.
+This allows researchers to separate statistical calculation from visual layout—storing results in a structured, machine-readable format that enhances traceability and simplifies quality control.
+
+The package's flexibility is further extended through its theme engine, which allows for the global application of formatting rules.
+This capability is particularly vital in clinical reporting, where adherence to specific journal or regulatory standards is required.
+By supporting multiple print engines, including {gt}, {flextable}, and {kableExtra}, {gtsummary} ensures that its outputs can be rendered across various formats—such as HTML, PDF, and Word—without losing their structural integrity.
+It is this combination of ease-of-use, rigorous statistical underpinnings, and modern metadata support that makes {gtsummary} an ideal foundation for institutional extensions.
+
+## CRANE
+
+To address the specific reporting requirements of a large-scale pharmaceutical organization, we developed {crane} as a Roche-specific extension to the {gtsummary} framework.
+While {gtsummary} provides the foundational architecture for table construction, {crane} acts as a specialized layer that codifies institutional standards into reproducible code.
+The package serves three primary roles: providing a unified organizational theme, offering "thin" wrappers around core functions to set internal defaults, and introducing bespoke functions for complex clinical summaries.
+
+A central feature of the package is `theme_gtsummary_roche()`, which ensures that all outputs adhere to company styling guidelines without requiring manual intervention from programmers.
+This theme automates specific formatting requirements, such as rounding p-values to four decimal places, implementing custom percentage rounding logic, and standardizing header styles (e.g., displaying "N" in parentheses without bolding). By defaulting to the {flextable} engine and applying Roche-specific fonts, borders, and cell padding, {crane} guarantees that tables are "submission-ready" directly from the R console.
+
+Beyond aesthetics, {crane} simplifies the user experience through optimized wrapper functions like `tbl_roche_summary()`.
+This function shifts {gtsummary} defaults to align with clinical norms—for instance, defaulting to a "continuous2" summary type to display multiple statistics on separate rows and prioritizing the display of non-missing counts.
+
+```{r}
+crane::tbl_roche_summary(
+  data = cards::ADSL,
+  by = TRTA, 
+  include = c(AGE, RACE)
+)
+```
+
+The package also extends the ecosystem with high-level functions for domain-specific tasks, such as `tbl_baseline_chg()`, which automates the common clinical requirement of merging baseline and post-baseline change summaries.
+
+```{r}
+cards::ADLB |> 
+  dplyr::filter(PARAM == "Albumin (g/L)", AVISIT %in% c("Baseline", "Week 12")) |> 
+  crane::tbl_baseline_chg(
+    by = TRTA,
+    baseline_level = "Baseline",
+    denominator = cards::ADSL
+  )
+```
+
+Finally, {crane} embraces an "ARD-first" workflow, leveraging Analysis Results Data to support complex efficacy reporting. By providing this institutional blueprint, {crane} allows Roche to maintain the flexibility of open-source software while enforcing the rigorous consistency demanded by the pharmaceutical industry.
+
+## CONCLUSION
+
+The implementation of {crane} at Roche demonstrates that the successful adoption of open-source tools at scale requires a deliberate balance between global flexibility and local standardization.
+By building upon the robust foundation of {gtsummary}, we have been able to provide our data scientists with a modern, "tidy" workflow that they find intuitive and powerful, while simultaneously ensuring that every output meets the rigorous aesthetic and structural requirements of pharmaceutical reporting.
+
+Our experience highlights that the most effective path toward organizational standardization is not to restrict choice, but to lower the barrier to "correct" formatting.
+Through the use of institutional themes and domain-specific wrappers, {crane} effectively codifies complex reporting guidelines into a few lines of code.
+This "blueprint" approach reduces the manual overhead of table construction, minimizes the risk of human error in formatting, and allows statisticians and programmers to focus on the scientific integrity of their results rather than the minutiae of table borders or rounding rules.
+
+Furthermore, the integration of Analysis Results Data (ARD) within this framework ensures that our reporting pipeline remains future-proof, supporting a metadata-driven approach that enhances traceability and reproducibility.
+As organizations across the industry continue to modernize their clinical trial environments, the model presented here—extending high-quality open-source packages with institution-specific functionality—serves as a scalable roadmap.
+Ultimately, {crane} proves that when the power of the community is paired with the precision of institutional standards, the result is a significant gain in both efficiency and quality for clinical reporting.

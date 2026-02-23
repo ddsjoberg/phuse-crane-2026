@@ -30,6 +30,8 @@ website:
     contents:
      - href: index.qmd
        text: Home
+     - href: paper/paper.qmd
+       text: Paper
      - href: license.qmd
 
 format:

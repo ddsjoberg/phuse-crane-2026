@@ -15,7 +15,7 @@ editor:
 
 ------------------------------------------------------------------------
 
-## Description
+## Abstract
 
 {gtsummary} is a widely used R package for creating publication-ready summary tables across diverse fields.
 While its flexibility supports broad adoption, organizations often require consistent formatting and domain-specific functionality to meet internal and field standards.
@@ -34,7 +34,6 @@ We will present the design of crane, share lessons learned from its implementati
 ```{=html}
 <iframe class="slide-deck" src="/slides/" height="420" width="747" style="border: 1px solid #2e3846;"></iframe>
 ```
-
 
 ## Presenter
 
