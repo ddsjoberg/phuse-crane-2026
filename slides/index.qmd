@@ -630,7 +630,7 @@ If you prefer not to make an ARD first, you can also just create a data frame of
 
 ## <img src="https://upload.wikimedia.org/wikipedia/commons/0/06/Claude_AI_logo.png" align="left" height="70"/><br><br>
 
-A "coding partner" that strictly adheres to your domain-specific standards—like tidyverse data prep and crane themes without constant reminders.
+A "coding partner" that strictly adheres to your domain-specific standards without constant reminders.
 
 <!-- * Effortlessly toggles between high-level table functions and low-level ARD construction. -->
 
