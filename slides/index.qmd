@@ -57,7 +57,7 @@ options(width = 200)
 ::: small
 -   The stats
 
-    -   [1,900,000 installations]{.emphasis} from CRAN
+    -   [2,000,000 installations]{.emphasis} from CRAN
     -   1,200 GitHub stars
     -   1,200 citations in peer-reviewed articles
     -   50 code contributors
