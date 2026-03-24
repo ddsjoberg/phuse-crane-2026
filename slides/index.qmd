@@ -126,7 +126,7 @@ Figure contains 30-day downloads for all summary table packages on CRAN.
 
 - Since {gtsummary} is widely adopted, our LLMs besties work wonderfully out of the box. No additional training needed!
     
-- The {gtsummary} site has recently added an AI assistant and it's AMAZING! Powered by `kapa.ai` (thank you!)
+- The {gtsummary} site has recently added an AI assistant and it's AMAZING! (Thanks `kapa.ai`)
     
 <img src="images/gtsummary-kapa.png" align="center" height="300"/>
 
@@ -628,7 +628,42 @@ tbl_survfit_times(
 If you prefer not to make an ARD first, you can also just create a data frame of a table and convert it to {gtsummary} and style it from there.
 :::
 
+## <img src="https://upload.wikimedia.org/wikipedia/commons/0/06/Claude_AI_logo.png" align="left" height="70"/><br><br>
+
+A "coding partner" that strictly adheres to your domain-specific standards—like tidyverse data prep and crane themes without constant reminders.
+
+<!-- * Effortlessly toggles between high-level table functions and low-level ARD construction. -->
+
+
+`SKILLS.md`
+```markdown
+# Skills: Clinical Trial Summary Table Development
+
+Standardized workflow for R-based clinical reporting using `crane`, `gtsummary`, and `cards`.
+
+## Configuration & Principles
+* **Setup:** Always run `crane::theme_gtsummary_roche()` after library imports.
+* **Data Prep:** Use **tidyverse** to finalize factor levels and labels before calling summary functions.
+
+## Table Workflows
+
+### Path A: Data-First (Primary)
+Use for standard summaries.
+1.  **Function:** `crane::tbl_*()` (if applicable), else `gtsummary::tbl_summary()`.
+2.  **Traceability:** Extract ARD immediately using `gtsummary::gather_ard()`.
+
+### Path B: ARD-First (Fallback)
+Use for complex/custom nesting.
+1.  **Calculate:** Generate ARD via `cards::ard_stack()` or `cards::ard_*()` functions.
+2.  **Render:** Pass ARD to `gtsummary::tbl_ard_*()` functions.
+
+## Core Libraries
+`library(tidyverse)`, `library(crane)`, `library(gtsummary)`, `library(cards)`
+```
+
+
 ## 
+
 
 
 :::::: columns
