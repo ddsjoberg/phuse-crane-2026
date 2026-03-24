@@ -11,7 +11,7 @@
     "href": "slides/index.html#but-first-what-is-gtsummary",
     "title": "Adopting gtsummary at Scale",
     "section": "But First, What is {gtsummary} ?",
-    "text": "But First, What is {gtsummary} ?\n\n\nHow it started\n\n\nBegan to address reproducibility issues while working in academia\nGoal to build a package to summarize study results with code that was both simple and customizable\n\n\n\nHow it’s going\n\n\nThe stats\n\n1,900,000 installations from CRAN\n1,200 GitHub stars\n1,200 citations in peer-reviewed articles\n50 code contributors\n\nWon the 2025 Brian Bole Award of Excellence from R in Pharma\nWon the 2021 American Statistical Association (ASA) Innovation in Programming Award\nWon the 2024 Posit Pharma Table Contest"
+    "text": "But First, What is {gtsummary} ?\n\n\nHow it started\n\n\nBegan to address reproducibility issues while working in academia\nGoal to build a package to summarize study results with code that was both simple and customizable\n\n\n\nHow it’s going\n\n\nThe stats\n\n2,000,000 installations from CRAN\n1,200 GitHub stars\n1,200 citations in peer-reviewed articles\n50 code contributors\n\nWon the 2025 Brian Bole Award of Excellence from R in Pharma\nWon the 2021 American Statistical Association (ASA) Innovation in Programming Award\nWon the 2024 Posit Pharma Table Contest"
   },
   {
     "objectID": "slides/index.html#monthly-gtsummary-cran-downloads",
