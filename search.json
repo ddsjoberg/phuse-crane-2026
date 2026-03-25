@@ -91,18 +91,11 @@
     "text": "Customize tbl_summary() output\n\n\nadsl |&gt; \n  tbl_summary(\n    include = c(AGE, ETHNIC, FEMALE),\n    by = ARM2,\n    type = AGE ~ \"continuous2\",\n    statistic = \n      list(\n        AGE ~ c(\"{mean} ({sd})\", \n                \"{min}, {max}\"), \n        FEMALE ~ \"{n} / {N} ({p}%)\"\n      ),\n    label = \n      AGE ~ \"Age, years\",\n    digits = AGE ~ list(sd = 1) # report SD(age) to one decimal place\n  )\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nPlacebo\nN = 861\nXanomeline\nN = 1681\n\n\n\n\nAge, years\n\n\n\n\n\n\n    Mean (SD)\n75 (8.6)\n75 (8.1)\n\n\n    Min, Max\n52, 89\n51, 88\n\n\nEthnicity\n\n\n\n\n\n\n    HISPANIC OR LATINO\n3 (3.5%)\n9 (5.4%)\n\n\n    NOT HISPANIC OR LATINO\n83 (97%)\n159 (95%)\n\n\nFemale\n53 / 86 (62%)\n90 / 168 (54%)\n\n\n\n1 n (%); n / N (%)\n\n\n\n\n\n\n\n\n\n\n\n\nby: specify a column variable for cross-tabulation\ntype: specify the summary type\nstatistic: customize the reported statistics\n\n\n\nlabel: change or customize variable labels\ndigits: specify the number of decimal places for rounding"
   },
   {
-    "objectID": "slides/index.html#gtsummary-formulas",
-    "href": "slides/index.html#gtsummary-formulas",
-    "title": "Adopting gtsummary at Scale",
-    "section": "{gtsummary} + formulas",
-    "text": "{gtsummary} + formulas\nThis syntax is also used in {cards}, {cardx}, {crane}, and {gt}.\n\n\n\nNamed list are OK too! label = list(age = \"Patient Age\")"
-  },
-  {
     "objectID": "slides/index.html#section",
     "href": "slides/index.html#section",
     "title": "Adopting gtsummary at Scale",
     "section": "",
-    "text": "{gtsummary} selectors\n\nUse the following helpers to select groups of variables: all_continuous(), all_categorical()\nUse all_stat_cols() to select the summary statistic columns\n\nAdd-on functions in {gtsummary}\ntbl_summary() objects can also be updated using related functions.\n\nadd_*() add additional column of statistics or information, e.g. p-values, q-values, overall statistics, treatment differences, N obs., and more\nmodify_*() modify table headers, spanning headers, footnotes, and more"
+    "text": "Add-on functions in {gtsummary}\ntbl_summary() objects can also be updated using related functions.\n\nadd_*() add additional column of statistics or information, e.g. p-values, q-values, overall statistics, treatment differences, N obs., and more\nmodify_*() modify table headers, spanning headers, footnotes, and more"
   },
   {
     "objectID": "slides/index.html#update-tbl_summary-with-add_",
@@ -119,13 +112,6 @@
     "text": "Update tbl_summary() with modify_*()\n\n\ntbl &lt;-\n  adsl |&gt; \n  tbl_summary(by = ARM2, include = c(\"AGE\", \"ETHNIC\", \"FEMALE\")) |&gt;\n  modify_header(\n    stat_1 ~ \"**Group A**\",\n    stat_2 ~ \"**Group B**\"\n  ) |&gt; \n  modify_spanning_header(\n    all_stat_cols() ~ \"**Drug**\") |&gt; \n  modify_footnote(\n    all_stat_cols() ~ \n      paste(\"median (IQR) for continuous;\",\n            \"n (%) for categorical\")\n  )\ntbl\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\n\nDrug\n\n\n\nGroup A1\nGroup B1\n\n\n\n\nAge\n76 (69, 82)\n77 (71, 81)\n\n\nEthnicity\n\n\n\n\n\n\n    HISPANIC OR LATINO\n3 (3.5%)\n9 (5.4%)\n\n\n    NOT HISPANIC OR LATINO\n83 (97%)\n159 (95%)\n\n\nFemale\n53 (62%)\n90 (54%)\n\n\n\n1 median (IQR) for continuous; n (%) for categorical\n\n\n\n\n\n\n\n\n\nUse show_header_names() to see the internal header names available for use in modify_header()"
   },
   {
-    "objectID": "slides/index.html#column-names",
-    "href": "slides/index.html#column-names",
-    "title": "Adopting gtsummary at Scale",
-    "section": "Column names",
-    "text": "Column names\n\nshow_header_names(tbl)\n\nColumn Name   Header                 level*             N*          n*          p*             \nlabel         \"**Characteristic**\"                      254 &lt;int&gt;                              \nstat_1        \"**Group A**\"             Placebo &lt;chr&gt;   254 &lt;int&gt;    86 &lt;int&gt;   0.339 &lt;dbl&gt;    \nstat_2        \"**Group B**\"          Xanomeline &lt;chr&gt;   254 &lt;int&gt;   168 &lt;int&gt;   0.661 &lt;dbl&gt;    \n\n\n* These values may be dynamically placed into headers (and other locations).\nℹ Review the `modify_header()` (`?gtsummary::modify_header()`) help for examples.\n\n\n\n\nall_stat_cols() selects columns \"stat_1\" and \"stat_2\""
-  },
-  {
     "objectID": "slides/index.html#add-on-functions-in-gtsummary-1",
     "href": "slides/index.html#add-on-functions-in-gtsummary-1",
     "title": "Adopting gtsummary at Scale",
@@ -138,13 +124,6 @@
     "title": "Adopting gtsummary at Scale",
     "section": "Cobbling Table with {gtsummary}",
     "text": "Cobbling Table with {gtsummary}\n\nTwo or more {gtsummary} tables can be combined by either merging or stacking.\n\ntbl_merge() for horizontal combining\ntbl_stack() for vertical combining\n\n\n But more on this later in the {crane} section"
-  },
-  {
-    "objectID": "slides/index.html#gtsummary-print-engines",
-    "href": "slides/index.html#gtsummary-print-engines",
-    "title": "Adopting gtsummary at Scale",
-    "section": "{gtsummary} print engines",
-    "text": "{gtsummary} print engines"
   },
   {
     "objectID": "slides/index.html#finally-introducing-crane",
