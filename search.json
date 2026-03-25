@@ -4,7 +4,7 @@
     "href": "slides/index.html#what-is-crane",
     "title": "Adopting gtsummary at Scale",
     "section": "What is {crane} ? ",
-    "text": "What is {crane} ? \n\n{crane} is the Roche extension to {gtsummary} for Roche’s reporting requirements\n{crane} exports a {gtsummary} theme\n{crane} exports functions to bespoke summary tables"
+    "text": "What is {crane} ? \n\n{crane} is an R package extending {gtsummary} for Roche’s reporting requirements\n{crane} exports a {gtsummary} theme\n{crane} exports functions to bespoke summary tables"
   },
   {
     "objectID": "slides/index.html#but-first-what-is-gtsummary",
@@ -25,7 +25,7 @@
     "href": "slides/index.html#gtsummary-llms",
     "title": "Adopting gtsummary at Scale",
     "section": "{gtsummary} + LLMs ",
-    "text": "{gtsummary} + LLMs \n\nSince {gtsummary} is widely adopted, our LLMs besties work wonderfully out of the box. No additional training needed!\nThe {gtsummary} site has recently added an AI assistant and it’s AMAZING! (Thanks kapa.ai)"
+    "text": "{gtsummary} + LLMs \n\nSince {gtsummary} is widely adopted, our LLMs besties work wonderfully out of the box. No additional training needed!\nRecently added an AI assistant to the pakcage site and it’s AMAZING! (Thanks kapa.ai)"
   },
   {
     "objectID": "slides/index.html#this-talk-is-not-about-gtsummary",
@@ -103,13 +103,6 @@
     "title": "Adopting gtsummary at Scale",
     "section": "Update tbl_summary() with add_*()",
     "text": "Update tbl_summary() with add_*()\n\n\nadsl |&gt;\n  tbl_summary(\n    by = ARM2,\n    include = c(AGE, ETHNIC, FEMALE)\n  ) |&gt; \n  add_overall(last = TRUE)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\nPlacebo\nN = 861\nXanomeline\nN = 1681\nOverall\nN = 2541\n\n\n\n\nAge\n76 (69, 82)\n77 (71, 81)\n77 (70, 81)\n\n\nEthnicity\n\n\n\n\n\n\n\n\n    HISPANIC OR LATINO\n3 (3.5%)\n9 (5.4%)\n12 (4.7%)\n\n\n    NOT HISPANIC OR LATINO\n83 (97%)\n159 (95%)\n242 (95%)\n\n\nFemale\n53 (62%)\n90 (54%)\n143 (56%)\n\n\n\n1 Median (Q1, Q3); n (%)\n\n\n\n\n\n\n\n\n\nadd_overall(): adds a column of overall statistics"
-  },
-  {
-    "objectID": "slides/index.html#update-tbl_summary-with-modify_",
-    "href": "slides/index.html#update-tbl_summary-with-modify_",
-    "title": "Adopting gtsummary at Scale",
-    "section": "Update tbl_summary() with modify_*()",
-    "text": "Update tbl_summary() with modify_*()\n\n\ntbl &lt;-\n  adsl |&gt; \n  tbl_summary(by = ARM2, include = c(\"AGE\", \"ETHNIC\", \"FEMALE\")) |&gt;\n  modify_header(\n    stat_1 ~ \"**Group A**\",\n    stat_2 ~ \"**Group B**\"\n  ) |&gt; \n  modify_spanning_header(\n    all_stat_cols() ~ \"**Drug**\") |&gt; \n  modify_footnote(\n    all_stat_cols() ~ \n      paste(\"median (IQR) for continuous;\",\n            \"n (%) for categorical\")\n  )\ntbl\n\n\n\n\n\n\n\n\n\n\n\n\n\nCharacteristic\n\nDrug\n\n\n\nGroup A1\nGroup B1\n\n\n\n\nAge\n76 (69, 82)\n77 (71, 81)\n\n\nEthnicity\n\n\n\n\n\n\n    HISPANIC OR LATINO\n3 (3.5%)\n9 (5.4%)\n\n\n    NOT HISPANIC OR LATINO\n83 (97%)\n159 (95%)\n\n\nFemale\n53 (62%)\n90 (54%)\n\n\n\n1 median (IQR) for continuous; n (%) for categorical\n\n\n\n\n\n\n\n\n\nUse show_header_names() to see the internal header names available for use in modify_header()"
   },
   {
     "objectID": "slides/index.html#add-on-functions-in-gtsummary-1",
