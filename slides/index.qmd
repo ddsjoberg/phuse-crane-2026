@@ -643,7 +643,7 @@ Standardized workflow for R-based clinical reporting using `crane`, `gtsummary`,
 
 ## Configuration & Principles
 * **Setup:** Always run `crane::theme_gtsummary_roche()` after library imports.
-* **Data Prep:** Use **tidyverse** to finalize factor levels and labels before calling summary functions.
+* **Data Prep:** Use **tidyverse** for data preparation before calling summary functions.
 
 ## Table Workflows
 
