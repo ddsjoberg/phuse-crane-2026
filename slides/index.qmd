@@ -649,7 +649,7 @@ Standardized workflow for R-based clinical reporting using `crane`, `gtsummary`,
 
 ### Path A: Data-First (Primary)
 Use for standard summaries.
-1.  **Function:** `crane::tbl_*()` (if applicable), else `gtsummary::tbl_summary()`.
+1.  **Function:** `crane::tbl_*()` (if applicable), else `gtsummary::tbl_*()`.
 2.  **Traceability:** Extract ARD immediately using `gtsummary::gather_ard()`.
 
 ### Path B: ARD-First (Fallback)
