@@ -33,7 +33,7 @@ options(width = 200)
 
 ## What is {crane} ? <img src="images/crane-hex.png" align="right" height="120"/>
 
--   {crane} is the Roche extension to {gtsummary} for Roche's reporting requirements
+-   {crane} is an R package extending {gtsummary} for Roche's reporting requirements
 
 -   {crane} exports a {gtsummary} theme
 
@@ -126,7 +126,7 @@ Figure contains 30-day downloads for all summary table packages on CRAN.
 
 - Since {gtsummary} is widely adopted, our LLMs besties work wonderfully out of the box. No additional training needed!
     
-- The {gtsummary} site has recently added an AI assistant and it's AMAZING! (Thanks `kapa.ai`)
+- Recently added an AI assistant to the pakcage site and it's AMAZING! (Thanks `kapa.ai`)
     
 <img src="images/gtsummary-kapa.png" align="center" height="300"/>
 
@@ -420,30 +420,30 @@ adsl |>
 
 -   `add_overall()`: adds a column of overall statistics
 
-## Update tbl_summary() with modify\_\*()
+<!-- ## Update tbl_summary() with modify\_\*() -->
 
-```{r}
-#| label: 'summary-modified'
-#| output-location: "column"
-#| code-line-numbers: "4,5,6,7,8,9,10,11,12,13,14"
-tbl <-
-  adsl |> 
-  tbl_summary(by = ARM2, include = c("AGE", "ETHNIC", "FEMALE")) |>
-  modify_header(
-    stat_1 ~ "**Group A**",
-    stat_2 ~ "**Group B**"
-  ) |> 
-  modify_spanning_header(
-    all_stat_cols() ~ "**Drug**") |> 
-  modify_footnote(
-    all_stat_cols() ~ 
-      paste("median (IQR) for continuous;",
-            "n (%) for categorical")
-  )
-tbl
-```
+<!-- ```{r} -->
+<!-- #| label: 'summary-modified' -->
+<!-- #| output-location: "column" -->
+<!-- #| code-line-numbers: "4,5,6,7,8,9,10,11,12,13,14" -->
+<!-- tbl <- -->
+<!--   adsl |>  -->
+<!--   tbl_summary(by = ARM2, include = c("AGE", "ETHNIC", "FEMALE")) |> -->
+<!--   modify_header( -->
+<!--     stat_1 ~ "**Group A**", -->
+<!--     stat_2 ~ "**Group B**" -->
+<!--   ) |>  -->
+<!--   modify_spanning_header( -->
+<!--     all_stat_cols() ~ "**Drug**") |>  -->
+<!--   modify_footnote( -->
+<!--     all_stat_cols() ~  -->
+<!--       paste("median (IQR) for continuous;", -->
+<!--             "n (%) for categorical") -->
+<!--   ) -->
+<!-- tbl -->
+<!-- ``` -->
 
--   Use `show_header_names()` to see the internal header names available for use in `modify_header()`
+<!-- -   Use `show_header_names()` to see the internal header names available for use in `modify_header()` -->
 
 <!-- ## Column names -->
 
